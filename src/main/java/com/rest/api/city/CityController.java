@@ -1,6 +1,7 @@
-package com.rest.api.country;
+package com.rest.api.city;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,30 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/country")
-public class CountryController {
+@RequestMapping("/city")
+public class CityController {
 
     @Autowired
-    CountryService countryService;
+    CityService cityService;
 
     @GetMapping
-    public List<Country> getAll() {
-        return countryService.getAll();
+    public List<City> getAll() {
+        return cityService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Country getCountryById(@PathVariable(value = "id") long id) {
-        return countryService.getById(id);
-    }
-
-    @GetMapping("/name/{name}")
-    public Country getCountryName(@PathVariable(value = "name") String name) {
-        return countryService.getName(name);
+    public City getCountryById(@PathVariable(value = "id") long id) {
+        return cityService.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<String> saveCountry(@RequestBody Country country) {
-        countryService.save(country);
+    public ResponseEntity<String> saveCountry(@RequestBody City city) {
+        cityService.save(city);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("created sucessfully");
@@ -44,8 +40,8 @@ public class CountryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCountry(@PathVariable(value = "id") long id, @RequestBody Country country) {
-        countryService.updateById(id, country);
+    public ResponseEntity<String> updateCountry(@PathVariable(value = "id") long id, @RequestBody City city) {
+        cityService.updateById(id, city);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("updated");

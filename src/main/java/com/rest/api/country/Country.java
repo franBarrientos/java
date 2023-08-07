@@ -1,14 +1,20 @@
 package com.rest.api.country;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rest.api.city.City;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "county")
+@Table(name = "country")
 public class Country {
 
     @Id
@@ -23,6 +29,18 @@ public class Country {
 
     @Column(name = "people")
     private Long people;
+
+    @OneToMany(targetEntity = City.class, mappedBy = "country")
+    @JsonManagedReference
+    private List<City> cities;
+
+    public List<City> getCities() {
+        return this.cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
 
     public Country(Long id, String country, String region, Long people) {
         this.id = id;
